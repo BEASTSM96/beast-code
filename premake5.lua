@@ -1,6 +1,6 @@
-workspace "Win64-Win32-Base"
-	architecture "x86_64"
-	startproject "ExePrj"
+workspace "Beast-Code"
+	architecture "x64"
+	startproject "bcSandox"
 
 	configurations
 	{
@@ -16,9 +16,9 @@ workspace "Win64-Win32-Base"
 	
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
-group "Base/Core"
-project "libProject"
-	location "libProject"
+group "bc/Core"
+project "bc_BeastCode"
+	location "bc_BeastCode"
 	kind "StaticLib"
 	language "C++"
 	cppdialect "C++17"
@@ -41,7 +41,7 @@ project "libProject"
 
 	includedirs
 	{
-		"%{prj.name}/src",
+		"%{prj.name}/src"
 		
 	}
 
@@ -49,22 +49,23 @@ project "libProject"
 		systemversion "latest"
 		
 	filter "configurations:Debug"
-		defines "CORE_DEBUG"
+		defines "CORE_BC_DEBUG"
 		runtime "Debug"
 		symbols "on"
 
 	filter "configurations:Release"
-		defines "CORE_RELEASE"
+		defines "CORE_BC_RELEASE"
 		runtime "Release"
 		optimize "on"
 
 	filter "configurations:Dist"
-		defines "CORE_DIST"
+		defines "CORE_BC_DIST"
 		runtime "Release"
 		optimize "on"
-
-project "ExePrj"
-	location "ExePrj"
+		
+group "bc/Base"
+project "bcSandox"
+	location "bcSandox"
 	kind "ConsoleApp"
 	language "C++"
 	cppdialect "C++17"
@@ -81,28 +82,28 @@ project "ExePrj"
 
 	includedirs
 	{	
-		"libProject/src"
+		"bc_BeastCode/src"
 	}
 
 	links
 	{
-		"libProject"
+		"bc_BeastCode"
 	}
 
 	filter "system:windows"
 		systemversion "latest"
 			
 	filter "configurations:Debug"
-		defines "CORE_DEBUG"
+		defines "CORE_BC_DEBUG"
 		runtime "Debug"
 		symbols "on"
 
 	filter "configurations:Release"
-		defines "CORE_RELEASE"
+		defines "CORE_BC_RELEASE"
 		runtime "Release"
 		optimize "on"
 
 	filter "configurations:Dist"
-		defines "CORE_DIST"
+		defines "CORE_BC_DIST"
 		runtime "Release"
 		optimize "on"
