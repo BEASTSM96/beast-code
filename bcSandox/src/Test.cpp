@@ -1,11 +1,22 @@
-#include "Test.h"
+#include <BeastCode.h>
 
-int main() {
+class Sandbox : public BeastCode::Application
+{
+public:
+	Sandbox()
+	{
+		//PushLayer(new ExampleLayer());
 
-	while (true)
+	}
+
+	~Sandbox()
 	{
 
 	}
 
+};
 
+BeastCode::Application* BeastCode::CreateApplication()
+{
+	return new Sandbox();
 }
