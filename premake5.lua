@@ -16,6 +16,17 @@ workspace "Beast-Code"
 	
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- Include directories relative to root folder (solution directory)
+IncludeDir = {}
+IncludeDir["GLFW"] = "bc_BeastCode/third_party/GLFW/include"
+IncludeDir["Glad"] = "bc_BeastCode/third_party/Glad/include"
+IncludeDir["ImGui"] = "bc_BeastCode/third_party/imgui"
+
+group "bc/Dependencies"
+	include "bc_BeastCode/third_party/GLFW"
+	include "bc_BeastCode/third_party/Glad"
+	include "bc_BeastCode/third_party/imgui"
+
 group "bc/Core"
 project "bc_BeastCode"
 	location "bc_BeastCode"
@@ -27,6 +38,9 @@ project "bc_BeastCode"
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+
+	pchheader "bcpch.h"
+	pchsource "bc_BeastCode/src/bcpch.cpp"
 
 	files
 	{
@@ -41,25 +55,43 @@ project "bc_BeastCode"
 
 	includedirs
 	{
-		"%{prj.name}/src"
-		
+		"%{prj.name}/src",
+		"%{prj.name}/third_party/spdlog/include/",
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}",
+		"%{IncludeDir.ImGui}"
+	}
+
+	links 
+	{ 
+		"GLFW",
+		"Glad",
+		"ImGui",
+		"opengl32.lib"
 	}
 
 	filter "system:windows"
 		systemversion "latest"
 		
+		defines
+		{
+			"BC_PLATFORM_WINDOWS",
+			"BC_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
+		}
+		
 	filter "configurations:Debug"
-		defines "CORE_BC_DEBUG"
+		defines "BC_CORE_DEBUG"
 		runtime "Debug"
 		symbols "on"
 
 	filter "configurations:Release"
-		defines "CORE_BC_RELEASE"
+		defines "BC_CORE_RELEASE"
 		runtime "Release"
 		optimize "on"
 
 	filter "configurations:Dist"
-		defines "CORE_BC_DIST"
+		defines "BC_CORE_DIST"
 		runtime "Release"
 		optimize "on"
 		
@@ -82,7 +114,9 @@ project "bcSandox"
 
 	includedirs
 	{	
-		"bc_BeastCode/src"
+		"bc_BeastCode/src",
+		"bc_BeastCode/third_party/spdlog/include",
+		"bc_BeastCode/third_party"
 	}
 
 	links
@@ -93,17 +127,24 @@ project "bcSandox"
 	filter "system:windows"
 		systemversion "latest"
 			
+		
+		defines
+		{
+			"BC_PLATFORM_WINDOWS",
+			"BC_BUILD_DLL"
+		}
+
 	filter "configurations:Debug"
-		defines "CORE_BC_DEBUG"
+		defines "BC_CORE_DEBUG"
 		runtime "Debug"
 		symbols "on"
 
 	filter "configurations:Release"
-		defines "CORE_BC_RELEASE"
+		defines "BC_CORE_RELEASE"
 		runtime "Release"
 		optimize "on"
 
 	filter "configurations:Dist"
-		defines "CORE_BC_DIST"
+		defines "BC_CORE_DIST"
 		runtime "Release"
 		optimize "on"

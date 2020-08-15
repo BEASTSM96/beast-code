@@ -1,0 +1,6 @@
+[submodule "bc_BeastCode/third_party/spdlog"]
+	path = bc_BeastCode/third_party/spdlog
+	url = https://github.com/gabime/spdlog
+[submodule "bc_BeastCode\\third_party\\GLFW"]
+	path = bc_BeastCode\\third_party\\GLFW
+	url = https://github.com/TheCherno/glfw
