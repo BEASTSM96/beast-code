@@ -4,3 +4,12 @@
 [submodule "bc_BeastCode\\third_party\\GLFW"]
 	path = bc_BeastCode\\third_party\\GLFW
 	url = https://github.com/TheCherno/glfw
+[submodule "bc_BeastCode\\third_party\\imgui"]
+	path = bc_BeastCode\\third_party\\imgui
+	url = https://github.com/TheCherno/imgui
+[submodule "bc_FileDialog\\third_party\\dirent"]
+	path = bc_FileDialog\\third_party\\dirent
+	url = https://github.com/tronkko/dirent/
+[submodule "bc_FileDialog\\third_party\\imguifiledialog"]
+	path = bc_FileDialog\\third_party\\imguifiledialog
+	url = https://github.com/aiekick/ImGuiFileDialog

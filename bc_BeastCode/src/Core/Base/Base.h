@@ -2,6 +2,11 @@
 
 #include <memory>
 
+#ifdef BC_PLATFORM_WINDOWS
+#define BEASTCODE_API_EXPORT_ALL __declspec(dllexport)
+#else
+#error Beastcode only supports Windows!
+#endif
 
 #ifdef BC_PLATFORM_WINDOWS
 #if BC_DYNAMIC_LINK

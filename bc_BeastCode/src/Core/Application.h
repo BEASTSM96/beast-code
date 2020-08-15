@@ -10,6 +10,10 @@
 
 #include "ImGui/ImLayer.h"
 
+#include "ImGui/Widgets/MainMenuBar.h"
+
+#include "ImGui/Widgets/SolutionExplorer.h"
+
 namespace BeastCode {
 
 	class Application
@@ -28,6 +32,10 @@ namespace BeastCode {
 		inline Window& GetWindow() { return *m_Window; }
 
 		inline static Application& Get() { return *s_Instance; }
+
+
+		std::string SaveFile(const char* filter) const;
+		std::string OpenFile(const char* filter) const;
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
 	private:
@@ -37,6 +45,10 @@ namespace BeastCode {
 		LayerStack m_layerStack;
 
 		ImGuiLayer* m_layer;
+
+		SouExplorer* m_SloExp;
+
+		MainMenuBar* m_MainMenuBar;
 	};
 
 	// To be defined in CLIENT

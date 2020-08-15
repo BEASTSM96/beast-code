@@ -5,8 +5,6 @@ class Sandbox : public BeastCode::Application
 public:
 	Sandbox()
 	{
-		//PushLayer(new ExampleLayer());
-
 	}
 
 	~Sandbox()
